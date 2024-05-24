@@ -2,3 +2,6 @@ rootProject.name = 'BPositiveAdminClient'
 include 'BPositiveCommon'
 include 'BPositiveCommon:BPositiveModel'
 project(':BPositiveCommon:BPositiveModel').projectDir = new File('./BPositiveCommon/BPositiveModel')
+project(':BPositiveCommon').projectDir = new File('./BPositiveCommon')
+include 'BPositiveCommon:BPositiveOther'
+project(':BPositiveCommon:BPositiveOther').projectDir = new File('./BPositiveCommon/BPositiveOther')

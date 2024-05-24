@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@buttonstyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminScreen">
+   <children>
+      <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
+         <image>
+            <Image url="@background bpositive v2.png" />
+         </image></ImageView>
+      <Label layoutX="16.0" layoutY="14.0" text="Welcome to BPositive, Admin !">
+         <font>
+            <Font name="Gill Sans MT Bold Italic" size="20.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3803921639919281" green="0.08235294371843338" blue="0.08235294371843338" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6313725709915161" green="0.003921568859368563" blue="0.2078431397676468" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <TableView layoutX="48.0" layoutY="153.0" prefHeight="421.0" prefWidth="422.0">
+        <columns>
+          <TableColumn prefWidth="98.4000244140625" text="Name" />
+          <TableColumn prefWidth="113.80001831054688" text="Beginning Date" />
+            <TableColumn prefWidth="125.39996337890625" text="Requirements" />
+            <TableColumn prefWidth="82.39999999999998" text="Description" />
+        </columns>
+      </TableView>
+      <Label layoutX="137.0" layoutY="119.0" text="Events on the wait list...">
+         <font>
+            <Font name="Gill Sans MT Bold Italic" size="20.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3803921639919281" green="0.08235294371843338" blue="0.08235294371843338" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6313725709915161" green="0.003921568859368563" blue="0.2078431397676468" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="585.0" layoutY="164.0" text="Take action!">
+         <font>
+            <Font name="Gill Sans MT Bold Italic" size="20.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3803921639919281" green="0.08235294371843338" blue="0.08235294371843338" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6313725709915161" green="0.003921568859368563" blue="0.2078431397676468" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Button layoutX="673.0" layoutY="202.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="94.0" stylesheets="@buttonstyle.css" text="Approve" textFill="#381010">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="527.0" layoutY="209.0" stylesheets="@buttonstyle.css" text="Approve event :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3803921639919281" green="0.08235294371843338" blue="0.08235294371843338" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6313725709915161" green="0.003921568859368563" blue="0.2078431397676468" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label layoutX="513.0" layoutY="246.0" prefHeight="19.0" prefWidth="270.0" text="(select an item from the list to be approved)" textFill="#635353">
+         <font>
+            <Font name="Gill Sans MT Italic" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="530.0" layoutY="283.0" text="Deny event :">
+         <font>
+            <Font name="Gill Sans MT" size="20.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.3803921639919281" green="0.08235294371843338" blue="0.08235294371843338" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.6313725709915161" green="0.003921568859368563" blue="0.2078431397676468" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <TextArea layoutX="513.0" layoutY="356.0" prefHeight="200.0" prefWidth="254.0" />
+      <Label layoutX="513.0" layoutY="323.0" prefHeight="18.0" prefWidth="254.0" text="(please give a reason for the dissaproval)" textFill="#635353">
+         <font>
+            <Font name="Gill Sans MT Italic" size="16.0" />
+         </font>
+      </Label>
+      <Button layoutX="673.0" layoutY="278.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" text="Deny">
+         <font>
+            <Font name="Century Gothic" size="14.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

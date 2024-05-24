@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bpos.adminclient.ViewController.admin.MainController">
+    <children>
+        <ImageView fitHeight="512.0" fitWidth="755.0" pickOnBounds="true">
+            <image>
+                <Image url="@views/abstract-background-pink-wave-simple-modern-elegant-premium-vector_552255-1818.jpg" />
+            </image>
+        </ImageView>
+      <ImageView fitHeight="54.0" fitWidth="54.0" layoutX="62.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@views/img.png" />
+         </image></ImageView>
+      <ListView fx:id="listCenters" layoutX="508.0" layoutY="126.0" prefHeight="288.0" prefWidth="223.0" />
+      <Label layoutX="320.0" layoutY="91.0" text="Active Users:" textFill="#611515">
+         <font>
+            <Font name="Century Gothic" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="54.0" fitWidth="108.0" layoutX="266.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@views/img_1.png" />
+         </image>
+      </ImageView>
+      <ListView fx:id="listUsers" layoutX="266.0" layoutY="128.0" prefHeight="288.0" prefWidth="223.0" />
+      <Label layoutX="580.0" layoutY="91.0" text="Centers:" textFill="#611515">
+         <font>
+            <Font name="Century Gothic" size="22.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="62.0" fitWidth="89.0" layoutX="527.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@views/img_2.png" />
+         </image>
+      </ImageView>
+      <ListView fx:id="listEvents" layoutX="25.0" layoutY="128.0" prefHeight="288.0" prefWidth="223.0" />
+      <Label layoutX="112.0" layoutY="91.0" text="Events:" textFill="#611515">
+         <font>
+            <Font name="Century Gothic" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="38.0" text="WELCOME TO BE POSITIVE!" textFill="#611515">
+         <font>
+            <Font name="Century Gothic" size="22.0" />
+         </font>
+      </Label>
+        <Button fx:id="addmedicalinfo" layoutX="352.0" layoutY="455.0" mnemonicParsing="false" text="Add" onAction="#handleUploadDocument"/>
+    </children>
+</AnchorPane>

@@ -21,13 +21,26 @@ repositories {
 }
 
 dependencies {
+    implementation('org.controlsfx:controlsfx:11.1.2')
+    implementation('com.dlsc.formsfx:formsfx-core:11.6.0') {
+        exclude(group: 'org.openjfx')
+    }
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation project(':BPositiveCommon')
     implementation project(':BPositiveCommon:BPositiveModel')
-    implementation 'org.openjfx:javafx-controls:17' // Am actualizat aici versiunea la 17
-    implementation 'org.openjfx:javafx-fxml:17'
+    implementation project(':BPositiveCommon:BPositiveOther')
+    implementation 'org.openjfx:javafx-controls:17.0.2' // Am actualizat aici versiunea la 17
+    implementation 'org.openjfx:javafx-fxml:17.0.2'
+    implementation 'org.java-websocket:Java-WebSocket:1.5.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    //implementation 'org.apache.httpcomponents:httpclient:4.5.13'
 
+
+        implementation 'com.konghq:unirest-java:3.13.6' // Use the latest version available
 
 
 
