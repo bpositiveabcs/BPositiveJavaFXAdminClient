@@ -107,12 +107,12 @@ public class LogInController {
         loginParams.put("password", password);
         String requestBody="";
         // Convertirea Map într-un JSON String
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            requestBody= objectMapper.writeValueAsString(loginParams);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        try {
+//            requestBody= objectMapper.writeValueAsString(loginParams);
+//        } catch (JsonProcessingException e) {
+//            throw new RuntimeException(e);
+//        }
 //
         Person person =clientService.login(username,password);
         if (person != null) {

@@ -1,7 +1,10 @@
 package bpos.adminclient.RestCommunication.services;
 
 import bpos.common.model.Person;
+import bpos.other.PersonResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.net.URI;
 import java.net.URLEncoder;
@@ -39,16 +42,23 @@ public class ClientService {
                 .uri(URI.create(uriWithParams))
                 .POST(HttpRequest.BodyPublishers.noBody())
                 .build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         try {
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-            ObjectMapper objectMapper = new ObjectMapper();
 
-            String responseBody = response.body(); // Presupunând că httpResponse este răspunsul primit de la server
-            System.out.println(responseBody); // Afișează corpul răspunsului
+            String responseBody = response.body();
+            System.out.println(responseBody);
 
-            Person person = objectMapper.readValue(responseBody, Person.class);
-            System.out.println(person); // Afișează obiectul Person
+            // Deserializare răspuns JSON în obiectul PersonResponse
+            PersonResponse personResponse = objectMapper.readValue(responseBody, PersonResponse.class);
+            System.out.println(personResponse);
+            // Acum poți accesa obiectul Person și lista de evenimente
+            Person person = personResponse.getPerson();
+            return person;
+
         } catch (Exception e) {
             e.printStackTrace();
         }
