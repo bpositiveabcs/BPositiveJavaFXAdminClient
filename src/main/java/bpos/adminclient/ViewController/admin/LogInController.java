@@ -33,6 +33,7 @@ import kong.unirest.json.JSONObject;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.net.URL;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.HashMap;
@@ -187,7 +188,9 @@ public class LogInController {
     }
     private void handleLoginSuccess(String username, String password, Person person) throws IOException {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main-admin.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            URL url=getClass().getResource("/admin-screen.fxml");
+            loader.setLocation(url);
             Parent userViewParent = loader.load();
             MainController userController = loader.getController();
             if (!Objects.equals(person.getPersonLogInfo().getPassword(), password)) {
@@ -196,7 +199,7 @@ public class LogInController {
                 return;
             }
                 userController.setServer(clientService);
-                userController.setLoggedUser(person);
+                userController.setLoggedUser(Optional.of(person));
 
                 Scene userViewScene = new Scene(userViewParent);
                 Stage stage = (Stage) usernameTextField.getScene().getWindow();

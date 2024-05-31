@@ -1,20 +1,27 @@
 package bpos.adminclient.RestCommunication.services;
 
+import bpos.common.model.Event;
 import bpos.common.model.Person;
 import bpos.other.PersonResponse;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Optional;
 
 public class ClientService {
     private static final String BASE_URL = "http://localhost:55555/personActorService";
+    private static final String BASE_URL2 = "http://localhost:55555";
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
 
@@ -22,6 +29,7 @@ public class ClientService {
         this.httpClient = HttpClient.newHttpClient();
         this.objectMapper = new ObjectMapper();
     }
+
     public void logout() {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(BASE_URL + "/logout"))
@@ -29,6 +37,7 @@ public class ClientService {
                 .build();
 
     }
+
     public Person login(String username, String password) {
         String params = URLEncoder.encode("username", StandardCharsets.UTF_8) + "=" + URLEncoder.encode(username, StandardCharsets.UTF_8) +
                 "&" +
@@ -65,5 +74,76 @@ public class ClientService {
         return null;
     }
 
+    public List<Event> allEvents() {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL2 + "/events"))
+                .GET()
+                .build();
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        try {
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            String responseBody = response.body();
+            System.out.println(responseBody);
 
+            // Deserialize the JSON array into a list of Event objects
+            List<Event> events = objectMapper.readValue(responseBody, new TypeReference<List<Event>>() {
+            });
+
+            return events;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Event updateEvent(Event event) {
+        System.out.println(event);
+        String eventJson = null;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+            eventJson = objectMapper.writeValueAsString(event);
+        } catch (JsonProcessingException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL2 + "/events"))
+                .PUT(HttpRequest.BodyPublishers.ofString(eventJson))
+                .header("Content-Type", "application/json")
+                .build();
+
+        System.out.println(request);
+
+        HttpResponse<String> response = null;
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            String responseBody = response.body();
+            System.out.println(responseBody);
+
+            if (response.statusCode() == 200) {
+                try {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    objectMapper.registerModule(new JavaTimeModule());
+                    objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+                    Event eventnou= objectMapper.readValue(responseBody, Event.class);
+                    return eventnou;
+                } catch (JsonProcessingException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else {
+                System.err.println("Failed to update event: " + response.body());
+                return null;
+            }
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }
+
+

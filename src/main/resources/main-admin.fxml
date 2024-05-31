@@ -9,12 +9,12 @@
     <children>
         <ImageView fitHeight="512.0" fitWidth="755.0" pickOnBounds="true">
             <image>
-                <Image url="@views/abstract-background-pink-wave-simple-modern-elegant-premium-vector_552255-1818.jpg" />
+                <Image url="@/abstract-background-pink-wave-simple-modern-elegant-premium-vector_552255-1818.jpg" />
             </image>
         </ImageView>
       <ImageView fitHeight="54.0" fitWidth="54.0" layoutX="62.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@views/img.png" />
+            <Image url="@/img.png" />
          </image></ImageView>
       <ListView fx:id="listCenters" layoutX="508.0" layoutY="126.0" prefHeight="288.0" prefWidth="223.0" />
       <Label layoutX="320.0" layoutY="91.0" text="Active Users:" textFill="#611515">
@@ -24,7 +24,7 @@
       </Label>
       <ImageView fitHeight="54.0" fitWidth="108.0" layoutX="266.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@views/img_1.png" />
+            <Image url="@/img_1.png" />
          </image>
       </ImageView>
       <ListView fx:id="listUsers" layoutX="266.0" layoutY="128.0" prefHeight="288.0" prefWidth="223.0" />
@@ -35,7 +35,7 @@
       </Label>
       <ImageView fitHeight="62.0" fitWidth="89.0" layoutX="527.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@views/img_2.png" />
+            <Image url="@/img_2.png" />
          </image>
       </ImageView>
       <ListView fx:id="listEvents" layoutX="25.0" layoutY="128.0" prefHeight="288.0" prefWidth="223.0" />

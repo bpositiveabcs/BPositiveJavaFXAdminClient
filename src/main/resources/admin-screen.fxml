@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@buttonstyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AdminScreen">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@buttonstyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bpos.adminclient.ViewController.admin.MainController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
          <image>
@@ -33,13 +33,13 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <TableView layoutX="48.0" layoutY="153.0" prefHeight="421.0" prefWidth="422.0">
-        <columns>
-          <TableColumn prefWidth="98.4000244140625" text="Name" />
-          <TableColumn prefWidth="113.80001831054688" text="Beginning Date" />
-            <TableColumn prefWidth="125.39996337890625" text="Requirements" />
-            <TableColumn prefWidth="82.39999999999998" text="Description" />
-        </columns>
+      <TableView fx:id="eventsTable" layoutX="48.0" layoutY="153.0" prefHeight="421.0" prefWidth="422.0">
+         <columns>
+            <TableColumn fx:id="nameColumn" prefWidth="98.4" text="Name" />
+            <TableColumn fx:id="beginningDateColumn" prefWidth="113.8" text="Beginning Date" />
+            <TableColumn fx:id="requirementsColumn" prefWidth="125.4" text="Requirements" />
+            <TableColumn fx:id="descriptionColumn" prefWidth="82.4" text="Description" />
+         </columns>
       </TableView>
       <Label layoutX="137.0" layoutY="119.0" text="Events on the wait list...">
          <font>
@@ -83,7 +83,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Button layoutX="673.0" layoutY="202.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="94.0" stylesheets="@buttonstyle.css" text="Approve" textFill="#381010">
+      <Button layoutX="673.0" layoutY="202.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="94.0" stylesheets="@buttonstyle.css" text="Approve" textFill="#381010" onAction="#handleApproveButton">
          <font>
             <Font name="Century Gothic" size="14.0" />
          </font>
