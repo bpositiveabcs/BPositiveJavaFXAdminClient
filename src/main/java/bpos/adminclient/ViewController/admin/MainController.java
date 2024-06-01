@@ -176,6 +176,14 @@ public class MainController {
         refreshListEvents();
     }
 
+    public void handleDenyUpdate(ActionEvent actionEvent) {
+        Event selectedEvent = eventsTable.getSelectionModel().getSelectedItem();
+        System.out.println(selectedEvent);
+        Event newEvent= new Event();
+        selectedEvent.setEventAnnouncementDate(LocalDateTime.now());
+        newEvent=clientService.deleteEvent(selectedEvent);
+    }
+
 //    @FXML
 //    private void handleUploadDocument() {
 //        FileChooser fileChooser = new FileChooser();

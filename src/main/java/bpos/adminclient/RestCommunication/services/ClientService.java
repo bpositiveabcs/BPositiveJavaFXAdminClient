@@ -144,6 +144,52 @@ public class ClientService {
             throw new RuntimeException(ex);
         }
     }
+
+    public Event deleteEvent(Event selectedEvent) {
+        System.out.println(selectedEvent);
+        String eventJson = null;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.registerModule(new JavaTimeModule());
+            objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+            eventJson = objectMapper.writeValueAsString(selectedEvent);
+        } catch (JsonProcessingException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(BASE_URL2 + "/events"))
+                .method("DELETE", HttpRequest.BodyPublishers.ofString(eventJson))
+                .header("Content-Type", "application/json")
+                .build();
+
+        System.out.println(request);
+
+        HttpResponse<String> response = null;
+        try {
+            response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            String responseBody = response.body();
+            System.out.println(responseBody);
+
+            if (response.statusCode() == 200) {
+                try {
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    objectMapper.registerModule(new JavaTimeModule());
+                    objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+                    Event eventnou= objectMapper.readValue(responseBody, Event.class);
+                    return eventnou;
+                } catch (JsonProcessingException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else {
+                System.err.println("Failed to delete event: " + response.body());
+                return null;
+            }
+        } catch (IOException | InterruptedException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
 }
 
 

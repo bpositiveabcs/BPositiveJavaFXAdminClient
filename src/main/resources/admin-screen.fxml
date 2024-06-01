@@ -141,7 +141,7 @@
             <Font name="Gill Sans MT Italic" size="16.0" />
          </font>
       </Label>
-      <Button layoutX="673.0" layoutY="278.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" text="Deny">
+      <Button layoutX="673.0" layoutY="278.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="94.0" text="Deny" onAction="#handleDenyUpdate">
          <font>
             <Font name="Century Gothic" size="14.0" />
          </font>
