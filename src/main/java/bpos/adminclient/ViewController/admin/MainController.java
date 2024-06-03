@@ -182,6 +182,7 @@ public class MainController {
         Event newEvent= new Event();
         selectedEvent.setEventAnnouncementDate(LocalDateTime.now());
         newEvent=clientService.deleteEvent(selectedEvent);
+        refreshListEvents();
     }
 
 //    @FXML
