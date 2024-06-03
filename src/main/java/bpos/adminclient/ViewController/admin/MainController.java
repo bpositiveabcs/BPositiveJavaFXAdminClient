@@ -6,6 +6,7 @@ import bpos.common.model.Event;
 
 import bpos.common.model.LogInfo;
 import bpos.common.model.Person;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -183,6 +184,16 @@ public class MainController {
         selectedEvent.setEventAnnouncementDate(LocalDateTime.now());
         newEvent=clientService.deleteEvent(selectedEvent);
         refreshListEvents();
+    }
+
+    public void handleLogoutButton(ActionEvent actionEvent) {
+        System.out.println("Logout button clicked!");
+        clientService.logout(loggedUser.get().getPersonLogInfo().getUsername());
+        // Example logic: Close the current window
+        //Stage stage = (Stage) listEvents.getScene().getWindow();
+        //stage.close();
+        // Oprește procesul curent
+        Platform.exit();
     }
 
 //    @FXML

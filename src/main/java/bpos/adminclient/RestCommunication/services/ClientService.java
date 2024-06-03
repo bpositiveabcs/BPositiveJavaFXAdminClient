@@ -18,6 +18,7 @@ import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 public class ClientService {
     private static final String BASE_URL = "http://localhost:55555/personActorService";
@@ -30,13 +31,37 @@ public class ClientService {
         this.objectMapper = new ObjectMapper();
     }
 
-    public void logout() {
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL + "/logout"))
-                .GET()
-                .build();
+    public void logout(String username) {
+        // Crează un obiect HttpClient
+        HttpClient httpClient = HttpClient.newHttpClient();
+        String params = URLEncoder.encode("username", StandardCharsets.UTF_8) + "=" ;
+        System.out.println(username);
 
+// Construiește URI-ul cu parametrii
+        String uriWithParams = BASE_URL + "/logoutAdmin?" + params+username;
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(uriWithParams))
+                .POST(HttpRequest.BodyPublishers.noBody())
+                .build();
+        System.out.println(request);
+        try {
+            // Trimite cererea și primește un răspuns
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+            // Verifică codul de stare al răspunsului
+            if (response.statusCode() == 200) {
+                System.out.println("Logout successful!");
+            } else {
+                System.out.println("Logout failed with status code: " + response.statusCode());
+            }
+        } catch (InterruptedException  e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
+
 
     public Person login(String username, String password) {
         String params = URLEncoder.encode("username", StandardCharsets.UTF_8) + "=" + URLEncoder.encode(username, StandardCharsets.UTF_8) +
