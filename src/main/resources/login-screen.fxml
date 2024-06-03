@@ -12,18 +12,18 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="backgroundPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffebed;" styleClass="container" stylesheets="@views/buttonstyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bpos.adminclient.ViewController.admin.LogInController">
+<AnchorPane fx:id="backgroundPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffebed;" styleClass="container" stylesheets="@buttonstyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bpos.adminclient.ViewController.admin.LogInController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffebed;" stylesheets="@views/buttonstyle.css">
+      <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffebed;" stylesheets="@buttonstyle.css">
          <children>
             <ImageView fx:id="topImageView" fitHeight="118.0" fitWidth="600.0" pickOnBounds="true">
                <image>
-                  <Image url="@views/banner v2.png" />
+                  <Image url="@banner v2.png" />
                </image>
             </ImageView>
             <ImageView fx:id="rectangleImageView" fitHeight="211.0" fitWidth="221.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@views/img_4.png" />
+                  <Image url="@img_4.png" />
                </image></ImageView>
           <Button fx:id="loginButton" layoutX="376.0" layoutY="291.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="41.0" prefWidth="114.0" styleClass="button-box" text="LOG IN">
                <font>

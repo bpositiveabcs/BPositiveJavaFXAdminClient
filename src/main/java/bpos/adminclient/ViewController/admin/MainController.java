@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -51,6 +52,8 @@ public class MainController {
 
     @FXML
     private TableColumn<Event, String> descriptionColumn;
+    @FXML
+    private Button refreshButton;
 
 
     ObservableList<Event> eventList = FXCollections.observableArrayList();
@@ -77,8 +80,6 @@ public class MainController {
     public void setServer(ClientService server)  {
         this.clientService = server;
         refreshListEvents();
-        refreshListCenters();
-        refreshListUsers();
 
     }
 
@@ -92,73 +93,19 @@ public class MainController {
     public void refreshListEvents()  {
         this.eventList.clear();
 
-        Iterable<Event> excursii = clientService.allEvents();
-        for (Event event : excursii) {
-            this.eventList.add(event);
-        }
+        Iterable<Event> events = clientService.allEvents();
+        events.forEach(event -> {
+            if (event.getEventStartDate().equals(LocalDateTime.of(0, 1, 1, 0, 0))) {
+                this.eventList.add(event);
+            }
+        });
         eventsTable.setItems(eventList);
     }
 
-    public void refreshListCenters() {
-        this.centerList.clear();
-//        Iterable<Center> centers = server.findAllCenters();
-//        for (Center center : centers) {
-//            this.centerList.add(center);
-//        }
-        //listCenters.setItems(centerList);
-    }
 
-    public void refreshListUsers() {
-//        this.userList.clear();
-//        List<LogInfo> users = (List<LogInfo>) server.findAllLogInfos();
-//        for (LogInfo user : users) {
-//            this.userList.add(user);
-//        }
-        //listUsers.setItems(userList);
-    }
 
-    @FXML
-    private void handleUploadDocument() {
-        LogInfo selectedUser = listUsers.getSelectionModel().getSelectedItem();
-        if (selectedUser != null) {
-            String username = selectedUser.getUsername(); // Assuming LogInfo has a getUsername() method
 
-            FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("Select Document to Upload");
-            fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("All Files", "*.*"),
-                    new FileChooser.ExtensionFilter("PDF Files", "*.pdf"),
-                    new FileChooser.ExtensionFilter("Text Files", "*.txt")
-            );
 
-            Stage stage = (Stage) listEvents.getScene().getWindow(); // Or another component in your scene
-            File selectedFile = fileChooser.showOpenDialog(stage);
-
-            if (selectedFile != null) {
-                try {
-                    // Create the main directory if it doesn't exist
-                    File mainDir = new File("user_medicalinfo");
-                    if (!mainDir.exists()) {
-                        mainDir.mkdir();
-                    }
-
-                    // Create the user-specific directory if it doesn't exist
-                    File userDir = new File(mainDir, username);
-                    if (!userDir.exists()) {
-                        userDir.mkdir();
-                    }
-
-                    // Copy the file to the user-specific directory
-                    Files.copy(selectedFile.toPath(), Paths.get(userDir.getPath(), selectedFile.getName()));
-                    System.out.println("File uploaded successfully!");
-                } catch (IOException e) {
-                    System.out.println("Failed to upload file: " + e.getMessage());
-                }
-            }
-        } else {
-            System.out.println("No user selected.");
-        }
-    }
 
     public void handleApproveButton(ActionEvent actionEvent) {
         System.out.println("Approve button clicked!");
@@ -167,7 +114,7 @@ public class MainController {
         Event selectedEvent = eventsTable.getSelectionModel().getSelectedItem();
         System.out.println(selectedEvent);
         Event newEvent= new Event();
-        selectedEvent.setEventAnnouncementDate(LocalDateTime.now());
+        selectedEvent.setEventStartDate(LocalDateTime.now());
         newEvent=clientService.updateEvent(selectedEvent);
         if (selectedEvent != null) {
             System.out.println("Selected Event: " + newEvent.getEventDescription());
@@ -196,31 +143,11 @@ public class MainController {
         Platform.exit();
     }
 
-//    @FXML
-//    private void handleUploadDocument() {
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Select Document to Upload");
-//        fileChooser.getExtensionFilters().addAll(
-//                new FileChooser.ExtensionFilter("All Files", "*.*"),
-//                new FileChooser.ExtensionFilter("PDF Files", "*.pdf"),
-//                new FileChooser.ExtensionFilter("Text Files", "*.txt")
-//        );
-//
-//        Stage stage = (Stage) listEvents.getScene().getWindow(); // Or another component in your scene
-//        File selectedFile = fileChooser.showOpenDialog(stage);
-//
-//        if (selectedFile != null) {
-//            try {
-//                File destDir = new File("user_medicalinfo");
-//                if (!destDir.exists()) {
-//                    destDir.mkdir();
-//                }
-//                Files.copy(selectedFile.toPath(), Paths.get(destDir.getPath(), selectedFile.getName()));
-//                System.out.println("File uploaded successfully!");
-//            } catch (IOException e) {
-//                System.out.println("Failed to upload file: " + e.getMessage());
-//            }
-//        }
+    public void handleRefreshButton(ActionEvent actionEvent) {
+        refreshListEvents();
+    }
+
+
 }
 
 
