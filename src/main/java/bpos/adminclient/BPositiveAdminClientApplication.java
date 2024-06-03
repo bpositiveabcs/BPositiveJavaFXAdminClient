@@ -1,12 +1,13 @@
 package bpos.adminclient;
 
+import bpos.common.model.Address;
 import jakarta.annotation.PostConstruct;
 import javafx.application.Application;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import bpos.common.model.Address;
+
 @SpringBootApplication
 public class BPositiveAdminClientApplication implements ApplicationRunner {
 

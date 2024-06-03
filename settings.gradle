@@ -5,3 +5,5 @@ project(':BPositiveCommon:BPositiveModel').projectDir = new File('./BPositiveCom
 project(':BPositiveCommon').projectDir = new File('./BPositiveCommon')
 include 'BPositiveCommon:BPositiveOther'
 project(':BPositiveCommon:BPositiveOther').projectDir = new File('./BPositiveCommon/BPositiveOther')
+project(':BPositiveCommon').projectDir = new File('./BPositiveCommon')
+include 'BPositiveCommon'

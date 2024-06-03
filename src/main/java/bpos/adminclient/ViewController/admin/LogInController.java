@@ -193,11 +193,7 @@ public class LogInController {
             loader.setLocation(url);
             Parent userViewParent = loader.load();
             MainController userController = loader.getController();
-            if (!Objects.equals(person.getPersonLogInfo().getPassword(), password)) {
-                System.out.println("Password is not correct");
-                passwordTextField.clear();
-                return;
-            }
+//
                 userController.setServer(clientService);
                 userController.setLoggedUser(Optional.of(person));
 
