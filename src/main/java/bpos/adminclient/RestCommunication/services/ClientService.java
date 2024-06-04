@@ -17,8 +17,6 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 public class ClientService {
     private static final String BASE_URL = "http://localhost:55555/personActorService";
@@ -137,7 +135,7 @@ public class ClientService {
         }
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL2 + "/events"))
+                .uri(URI.create(BASE_URL2 + "/events/event-acceptance"))
                 .PUT(HttpRequest.BodyPublishers.ofString(eventJson))
                 .header("Content-Type", "application/json")
                 .build();
@@ -170,7 +168,7 @@ public class ClientService {
         }
     }
 
-    public Event deleteEvent(Event selectedEvent) {
+    public Event deleteEvent(Event selectedEvent, String denialReason) {
         System.out.println(selectedEvent);
         String eventJson = null;
         try {
@@ -183,8 +181,8 @@ public class ClientService {
         }
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(BASE_URL2 + "/events"))
-                .method("DELETE", HttpRequest.BodyPublishers.ofString(eventJson))
+                .uri(URI.create(BASE_URL2 + "/events/event-denial?reason=" + URLEncoder.encode(denialReason, StandardCharsets.UTF_8)))
+                .POST(HttpRequest.BodyPublishers.ofString(eventJson))
                 .header("Content-Type", "application/json")
                 .build();
 
@@ -202,19 +200,20 @@ public class ClientService {
                     ObjectMapper objectMapper = new ObjectMapper();
                     objectMapper.registerModule(new JavaTimeModule());
                     objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-                    Event eventnou= objectMapper.readValue(responseBody, Event.class);
+                    Event eventnou = objectMapper.readValue(responseBody, Event.class);
                     return eventnou;
                 } catch (JsonProcessingException ex) {
                     throw new RuntimeException(ex);
                 }
             } else {
-                System.err.println("Failed to delete event: " + response.body());
+                System.err.println("Failed to deny event: " + response.body());
                 return null;
             }
         } catch (IOException | InterruptedException ex) {
             throw new RuntimeException(ex);
         }
     }
+
 }
 
 

@@ -1,5 +1,7 @@
 package bpos.adminclient.ViewController.admin;
 
+import bpos.adminclient.RestCommunication.WebSocketManager;
+import bpos.adminclient.RestCommunication.WebSocketMessageListener;
 import bpos.adminclient.RestCommunication.services.ClientService;
 import bpos.common.model.Center;
 import bpos.common.model.Event;
@@ -11,10 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -29,7 +28,7 @@ import java.util.List;
 import java.util.Optional;
 
 
-public class MainController {
+public class MainController implements WebSocketMessageListener {
     @FXML
     private ListView<Event> listEvents;
 
@@ -72,6 +71,7 @@ public class MainController {
         beginningDateColumn.setCellValueFactory(new PropertyValueFactory<>("eventStartDate"));
         requirementsColumn.setCellValueFactory(new PropertyValueFactory<>("eventRequirements"));
         descriptionColumn.setCellValueFactory(new PropertyValueFactory<>("eventDescription"));
+        WebSocketManager.getInstance().addListener(this);
         eventsTable.setItems(eventList);
 
 
@@ -123,13 +123,17 @@ public class MainController {
         }
         refreshListEvents();
     }
-
+    @FXML
+    private TextArea txtdenialReason;
     public void handleDenyUpdate(ActionEvent actionEvent) {
         Event selectedEvent = eventsTable.getSelectionModel().getSelectedItem();
         System.out.println(selectedEvent);
         Event newEvent= new Event();
         selectedEvent.setEventAnnouncementDate(LocalDateTime.now());
-        newEvent=clientService.deleteEvent(selectedEvent);
+        String denialReason = txtdenialReason.getText();
+        if(txtdenialReason.getText().isEmpty()){
+            denialReason="No reason provided";}
+        newEvent=clientService.deleteEvent(selectedEvent,denialReason);
         refreshListEvents();
     }
 
@@ -148,6 +152,12 @@ public class MainController {
     }
 
 
+    @Override
+    public void onMessageReceived(String message) {
+
+            refreshListEvents();
+
+    }
 }
 
 

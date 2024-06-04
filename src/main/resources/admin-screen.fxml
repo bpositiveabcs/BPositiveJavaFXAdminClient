@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@buttonstyle.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bpos.adminclient.ViewController.admin.MainController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" stylesheets="@buttonstyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="bpos.adminclient.ViewController.admin.MainController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="800.0" pickOnBounds="true">
          <image>
@@ -135,7 +142,7 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <TextArea layoutX="513.0" layoutY="356.0" prefHeight="200.0" prefWidth="254.0" />
+      <TextArea fx:id="txtdenialReason" layoutX="513.0" layoutY="356.0" prefHeight="200.0" prefWidth="254.0" />
       <Label layoutX="513.0" layoutY="323.0" prefHeight="18.0" prefWidth="254.0" text="(please give a reason for the dissaproval)" textFill="#635353">
          <font>
             <Font name="Gill Sans MT Italic" size="16.0" />
